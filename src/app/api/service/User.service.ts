@@ -1,3 +1,4 @@
+import { IRegisterUser } from "../../utils/interface/vacations.interface";
 import API_ENDPOINT from "../global";
 import api from "../global/config";
 
@@ -16,13 +17,7 @@ class UserService {
     return response.data;
   }
 
-  static async registerAdminHandler(data: {
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    phone: string;
-  }) {
+  static async registerAdminHandler(data: IRegisterUser) {
     const response = await api.post(REGISTER_ADMIN, data);
     return response.data;
   }

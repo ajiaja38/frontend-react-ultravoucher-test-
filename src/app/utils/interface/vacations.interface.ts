@@ -18,3 +18,11 @@ export interface IAddVacation {
   latitude: string;
   longitude: string;
 }
+
+export interface IRegisterUser {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone: string;
+}
