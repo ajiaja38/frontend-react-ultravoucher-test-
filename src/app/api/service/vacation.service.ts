@@ -27,19 +27,10 @@ export default class VacationService {
 
   static async getVacationByIdHandler(id: string) {
     const response = await api.get(VACATION_BY_ID(id));
-    return response.data;
+    return response.data.data;
   }
 
-  static async updateVacationHandler(
-    id: string,
-    data: {
-      name: string;
-      address: string;
-      description: string;
-      latitude: number;
-      longitude: number;
-    }
-  ) {
+  static async updateVacationHandler(id: string, data: IAddVacation) {
     const response = await api.put(VACATION_BY_ID(id), data);
     return response.data;
   }

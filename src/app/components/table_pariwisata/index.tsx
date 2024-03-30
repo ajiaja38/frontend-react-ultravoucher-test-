@@ -112,14 +112,16 @@ const TablePariwisata = () => {
                   {data.longitude}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 flex justify-center items-center gap-2">
-                  <Button
-                    color="yellow"
-                    placeholder={undefined}
-                    onPointerEnterCapture={undefined}
-                    onPointerLeaveCapture={undefined}
-                  >
-                    Edit
-                  </Button>
+                  <NavLink to={`/vacations/${data.id}`}>
+                    <Button
+                      color="yellow"
+                      placeholder={undefined}
+                      onPointerEnterCapture={undefined}
+                      onPointerLeaveCapture={undefined}
+                    >
+                      Edit
+                    </Button>
+                  </NavLink>
                   <Button
                     onClick={() => deleteVacation(data.id)}
                     color="red"
