@@ -32,6 +32,10 @@ const router = createBrowserRouter([
             path: "/vacations",
             element: privatePage.VacationPage,
           },
+          {
+            path: "/vacations/add",
+            element: privatePage.AddVacation,
+          },
         ],
       },
     ],

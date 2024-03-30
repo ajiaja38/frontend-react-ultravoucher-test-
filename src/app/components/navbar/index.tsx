@@ -1,10 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@material-tailwind/react";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import useToast from "../../hooks/useToast";
+import { ToastType } from "../../utils/enum/ToastTypeEnum";
+import AuthService from "../../api/service/Auth.service";
 
 const NavbarComponents = () => {
   const [role, setRole] = useState<string>("");
+  const { showToast } = useToast();
+  const navigate = useNavigate();
 
   const getRole = () => {
     const decoded: {
@@ -15,6 +21,15 @@ const NavbarComponents = () => {
       exp: number;
     } = jwtDecode(localStorage.getItem("accessToken") || "");
     setRole(decoded.role);
+  };
+
+  const logoutHandler = async () => {
+    try {
+      await AuthService.logoutHandler();
+      navigate("/");
+    } catch (error: any) {
+      showToast(ToastType.ERROR, error.response.data.message);
+    }
   };
 
   useEffect(() => {
@@ -30,11 +45,6 @@ const NavbarComponents = () => {
             Home
           </NavLink>
         </li>
-        {/* <li hidden={role !== "admin"}>
-          <NavLink className="hover:underline" to="/users">
-            user
-          </NavLink>
-        </li> */}
         <li hidden={role !== "admin"}>
           <NavLink className="hover:underline" to="/vacations">
             Pariwisata
@@ -42,6 +52,7 @@ const NavbarComponents = () => {
         </li>
         <li>
           <Button
+            onClick={logoutHandler}
             color="red"
             size="sm"
             placeholder={undefined}

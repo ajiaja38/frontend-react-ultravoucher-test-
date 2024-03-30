@@ -1,21 +1,22 @@
+import { IAddVacation } from "../../utils/interface/vacations.interface";
 import API_ENDPOINT from "../global";
 import api from "../global/config";
 
-const { VACATION, VACATION_PAGINATION, VACATION_BY_ID } = API_ENDPOINT;
+const { VACATION, VACATION_PAGINATION, VACATION_BY_ID, DELETE_VACATION_BY_ID } =
+  API_ENDPOINT;
 
 export default class VacationService {
-  static async createVacationHandler(data: {
-    name: string;
-    address: string;
-    description: string;
-    latitude: number;
-    longitude: number;
-  }) {
+  static async createVacationHandler(data: IAddVacation) {
     const response = await api.post(VACATION, data);
     return response.data;
   }
 
-  static async getAllVacationHandler(
+  static async getAllVacationHandler() {
+    const response = await api.get(VACATION);
+    return response.data;
+  }
+
+  static async getAllVacationHandlerPaginate(
     page: number,
     limit: number,
     search: string
@@ -44,7 +45,7 @@ export default class VacationService {
   }
 
   static async deleteVacationHandler(id: string) {
-    const response = await api.delete(VACATION_BY_ID(id));
+    const response = await api.delete(DELETE_VACATION_BY_ID(id));
     return response.data;
   }
 }

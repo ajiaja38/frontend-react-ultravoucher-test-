@@ -9,8 +9,9 @@ const API_ENDPOINT = {
   USER_BY_ID: (id: string) => `user/${id}`,
   VACATION: "vacation",
   VACATION_PAGINATION: (page: number, limit: number, search: string) =>
-    `vacation?page=${page}&limit=${limit}&search=${search}`,
+    `vacation/paginate?page=${page}&limit=${limit}&search=${search}`,
   VACATION_BY_ID: (id: string) => `vacation/${id}`,
+  DELETE_VACATION_BY_ID: (id: string) => `vacation/delete/${id}`,
 };
 
 export default API_ENDPOINT;

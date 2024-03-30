@@ -10,3 +10,11 @@ export interface IVacation {
   updatedAt: Date;
   __v: number;
 }
+
+export interface IAddVacation {
+  name: string;
+  address: string;
+  description: string;
+  latitude: string;
+  longitude: string;
+}
