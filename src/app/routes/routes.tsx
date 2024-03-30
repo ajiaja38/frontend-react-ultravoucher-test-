@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import { commonPage, errorPage } from "../pages";
+import { commonPage, errorPage, privatePage } from "../pages";
+import RequireAuth from "../middleware/RequireAuth";
+import LayoutAuth from "../components/layout";
 
 const router = createBrowserRouter([
   {
@@ -9,6 +11,30 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: commonPage.RegisterPage,
+  },
+  {
+    path: "/",
+    element: <RequireAuth redirectPath="/" />,
+    children: [
+      {
+        path: "/",
+        element: <LayoutAuth />,
+        children: [
+          {
+            path: "/home",
+            element: privatePage.HomePage,
+          },
+          {
+            path: "/users",
+            element: privatePage.UserPage,
+          },
+          {
+            path: "/vacations",
+            element: privatePage.VacationPage,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/*",
